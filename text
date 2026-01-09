@@ -1,0 +1,19 @@
+        <!-- Jamairo couldn't do it so I will -->
+        <div id="Carousel">
+            <div class="Carousel-group">
+                <div class="Carousel-card">1</div>
+                <div class="Carousel-card">2</div>
+                <div class="Carousel-card">3</div>
+                <div class="Carousel-card">4</div>
+                <div class="Carousel-card">5</div>
+                <div class="Carousel-card">6</div>
+            </div>
+            <div aria-hidden class="Carousel-group">
+                <div class="Carousel-card">1</div>
+                <div class="Carousel-card">2</div>
+                <div class="Carousel-card">3</div>
+                <div class="Carousel-card">4</div>
+                <div class="Carousel-card">5</div>
+                <div class="Carousel-card">6</div>
+            </div>
+        </div>
