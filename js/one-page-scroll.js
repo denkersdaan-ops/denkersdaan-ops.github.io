@@ -1,156 +1,148 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const sections = [
+  const panels = [
     ...document.querySelectorAll("main > section.panel"),
     document.querySelector("footer"),
   ].filter(Boolean);
 
-  const targets = sections.filter(el => el.id);
-  if (targets.length === 0) return;
+  const targets = panels.filter(p => p.id);
+  if (!targets.length) return;
 
-  let isSnapping = false;
-  let scrollStopTimer = null;
+  const TOL = 30;  // tolerance in pixels when scrolling(less sensitive to small panels)
+  const DURATION = 240; // time to move between panels in ms
+
+  let lastY = window.scrollY;
   let lastHash = "";
+  let isAnimating = false;
 
-  const STOP_DELAY_MS = 80;     // wanneer we "gestopt" zijn met scrollen
-  const EDGE_PX = 120;           // hoe dicht bij een section-rand om te mogen snappen
-  const MIN_MOVE_PX = 8;         // voorkom micro-snaps
-
-  function getDocTop(el) {
+  function docTop(el) {
     return window.scrollY + el.getBoundingClientRect().top;
   }
-  function getDocBottom(el) {
+  function docBottom(el) {
     return window.scrollY + el.getBoundingClientRect().bottom;
   }
 
-  function updateHashByCenter() {
-    const centerY = window.scrollY + window.innerHeight / 2;
-
-    let best = null;
-    let bestDist = Infinity;
-
-    for (const el of targets) {
-      const top = getDocTop(el);
-      const bottom = getDocBottom(el);
-      const clamped = Math.max(top, Math.min(centerY, bottom));
-      const dist = Math.abs(centerY - clamped);
-
-      if (dist < bestDist) {
-        bestDist = dist;
-        best = el;
-      }
-    }
-
-    if (!best) return;
-    const newHash = `#${best.id}`;
-    if (newHash !== lastHash) {
-      lastHash = newHash;
-      history.replaceState(null, "", newHash);
-    }
-  }
-
-  // Vind huidige section op basis van viewport center
-  function currentSectionIndex() {
+  function getCurrentIndex() {
     const centerY = window.scrollY + window.innerHeight / 2;
 
     for (let i = 0; i < targets.length; i++) {
-      const el = targets[i];
-      const top = getDocTop(el);
-      const bottom = getDocBottom(el);
-      if (centerY >= top && centerY <= bottom) return i;
+      const t = docTop(targets[i]);
+      const b = docBottom(targets[i]);
+      if (centerY >= t && centerY <= b) return i;
     }
 
-    // fallback: dichtstbij
     let bestI = 0, bestD = Infinity;
     for (let i = 0; i < targets.length; i++) {
-      const top = getDocTop(targets[i]);
-      const d = Math.abs(top - window.scrollY);
+      const d = Math.abs(docTop(targets[i]) - window.scrollY);
       if (d < bestD) { bestD = d; bestI = i; }
     }
     return bestI;
   }
 
-  function smoothSnapToY(targetY) {
-    const diff = Math.abs(targetY - window.scrollY);
-    if (diff < MIN_MOVE_PX) return;
-
-    isSnapping = true;
-    window.scrollTo({ top: targetY, behavior: "smooth" });
-
-    const start = performance.now();
-    const maxMs = 900;
-
-    (function checkDone() {
-      updateHashByCenter();
-      const left = Math.abs(window.scrollY - targetY);
-      const now = performance.now();
-
-      if (left < 2 || now - start > maxMs) {
-        isSnapping = false;
-        return;
-      }
-      requestAnimationFrame(checkDone);
-    })();
+  function setHashByIndex(i) {
+    const id = targets[i]?.id;
+    if (!id) return;
+    const h = `#${id}`;
+    if (h !== lastHash) {
+      lastHash = h;
+      history.replaceState(null, "", h);
+    }
   }
 
-  function maybeSnap() {
-    if (isSnapping) return;
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
 
-    const i = currentSectionIndex();
+  let animRAF = 0;
+  function cancelAnim() {
+    if (animRAF) cancelAnimationFrame(animRAF);
+    animRAF = 0;
+    isAnimating = false;
+  }
+
+  function animateScrollTo(targetY, duration = DURATION) {
+    cancelAnim();
+
+    const startY = window.scrollY;
+    const delta = targetY - startY;
+
+
+    if (Math.abs(delta) < 2) return;
+
+    isAnimating = true;
+    const startT = performance.now();
+
+    const step = (now) => {
+      const t = Math.min(1, (now - startT) / duration);
+      const eased = easeInOutCubic(t);
+
+      window.scrollTo(0, startY + delta * eased);
+
+      if (t < 1) {
+        animRAF = requestAnimationFrame(step);
+      } else {
+        animRAF = 0;
+        isAnimating = false;
+      }
+    };
+
+    animRAF = requestAnimationFrame(step);
+  }
+
+  window.addEventListener("keydown", (e) => {
+
+    const keys = ["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "];
+    if (keys.includes(e.key)) cancelAnim();
+  });
+
+
+  function enforceEdges(direction) {
+    const i = getCurrentIndex();
     const el = targets[i];
+    if (!el) return;
 
-    const top = getDocTop(el);
-    const bottom = getDocBottom(el);
+    const top = docTop(el);
+    const bottom = docBottom(el);
 
     const viewTop = window.scrollY;
-    const viewBottom = window.scrollY + window.innerHeight;
+    const viewBottom = viewTop + window.innerHeight;
 
-    const distToTopEdge = Math.abs(viewTop - top);
-    const distToBottomEdge = Math.abs(viewBottom - bottom);
+    setHashByIndex(i);
 
-    const isTall = (bottom - top) > window.innerHeight + 1;
+    if (direction > 0) {
 
-    // 1) Als section groter is dan viewport:
-    //    - laat normaal scrollen
-    //    - snap alleen als je dicht bij top/bottom rand bent
-    if (isTall) {
-      if (distToTopEdge <= EDGE_PX) {
-        smoothSnapToY(top);
-      } else if (distToBottomEdge <= EDGE_PX) {
-        // naar begin van volgende section als die bestaat (of precies bottom)
+      if (viewBottom > bottom + TOL) {
         const next = targets[i + 1];
-        if (next) smoothSnapToY(getDocTop(next));
-        else smoothSnapToY(bottom - window.innerHeight); // bij footer-einde-ish
+        if (next) {
+          animateScrollTo(docTop(next));
+          setHashByIndex(i + 1);
+        }
       }
-      return;
+    } else if (direction < 0) {
+
+      if (viewTop < top - TOL) {
+        const prev = targets[i - 1];
+        if (prev) {
+          const prevBottom = docBottom(prev);
+          const y = Math.max(0, prevBottom - window.innerHeight);
+          animateScrollTo(y);
+          setHashByIndex(i - 1);
+        }
+      }
     }
-
-    // 2) Als section <= viewport (klassiek "1 scherm per panel"):
-    //    snap naar top van de huidige section
-    smoothSnapToY(top);
   }
-
+  let raf = 0;
   function onScroll() {
-    updateHashByCenter();
+    if (isAnimating) return;
 
-    if (isSnapping) return;
+    const y = window.scrollY;
+    const dir = y > lastY ? 1 : y < lastY ? -1 : 0;
+    lastY = y;
 
-    clearTimeout(scrollStopTimer);
-    scrollStopTimer = setTimeout(() => {
-      maybeSnap();
-    }, STOP_DELAY_MS);
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => enforceEdges(dir));
   }
 
   window.addEventListener("scroll", onScroll, { passive: true });
 
-  // Init: zet hash correct
-  updateHashByCenter();
-
-  // Als je met hash binnenkomt, laat de browser eerst landen en stabiliseer
-  if (location.hash) {
-    setTimeout(() => {
-      updateHashByCenter();
-      // niet meteen aggressief snappen bij tall sections; maybeSnap regelt dat
-      maybeSnap();
-    }, 60);
-  }
+  setHashByIndex(getCurrentIndex());
 });
