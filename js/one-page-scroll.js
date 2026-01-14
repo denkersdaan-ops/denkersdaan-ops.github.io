@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("keydown", (e) => {
 
-    const keys = ["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "];
+    const keys = ["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"];
     if (keys.includes(e.key)) cancelAnim();
   });
 

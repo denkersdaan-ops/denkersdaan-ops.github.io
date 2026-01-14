@@ -14,10 +14,11 @@
     <script src="js/dvd-bouce.js"></script>
     <script src="js/azurill.js"></script>
     <script src="js/one-page-scroll.js"></script>
+    <script src="js/hidden-header.js"></script>
 </head>
 
 <body class="bg-dark">
-    <header>
+    <header id="header-site" class="bg-dark-header">
         <div>
             <a href="#">
                 <h1 class="main-color"> Portfolio</h1>
@@ -27,8 +28,8 @@
             <nav>
                 <ul>
                     <li><a href="#section-2" class="text">About me</a></li>
-                    <li><a href="#section-3" class="text">Frontend</a></li>
-                    <li><a href="#section-5" class="text">Backend </a></li>
+                    <li><a href="#section-3" class="text">Front-end</a></li>
+                    <li><a href="#section-5" class="text">Back-end </a></li>
                 </ul>
             </nav>
         </div>
@@ -90,27 +91,8 @@
             </div>
         </section>
         <section id="section-3" class="bg-dark panel">
-            <!-- Jamairo couldn't do it so I will -->
-            <div id="Carousel">
-                <div class="Carousel-group">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="1">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="2">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="3">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="4">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="5">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="6">
-                </div>
-                <div aria-hidden class="Carousel-group">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="1">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="2">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="3">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="4">
-                    <img class="Carousel-card" src="assets/shark.gif" alt="5">
-                    <img class="Carousel-card" src="assets/horce.gif" alt="6">
-                </div>
-            </div>
             <div class="box-large bg">
-                <h1 class="text">Frontend programming</h1>
+                <h1 class="text">Front-end programming</h1>
                 <p class="bg-light text-muted">Here are some of my projects I've worked / things I did on recently for
                     websites.
                 </p>
@@ -119,10 +101,11 @@
                 <div class="box-large bg">
                     <h1>First Period</h1>
                     <div class="period-text bg-light">
-                        <p class="text-muted">All of my first period project for frontend was made in my website
+                        <p class="text-muted">All of my first period project for front-end was made in my website
                             classes. We
                             used html and css. I never made a website so this was all new for me. <br> Out of the two
-                            <b>FRONTEND</b> and <b>BACKEND</b> that frontend is a bit easier. I think that is because it
+                            <b>FRONT-END</b> and <b>BACK-END</b> that Front-end is a bit easier. I think that is because
+                            it
                             involves a lot more design than logic.
                         </p>
                     </div>
@@ -199,7 +182,7 @@
                         </div>
                         <div class="info-box">
                             <div class="project-card box bg-light">
-                                <img src="assets/Flappybird.png" alt="the flappy bird project">
+                                <img src="assets/Flappybird.png" alt="the flapy bird project">
                                 <h2 class="text">Flappy Bird</h2>
                                 <p class="text-muted">This was a personal project where I recreated the classic Flappy
                                     Bird
@@ -220,7 +203,7 @@
                                             decided to recreate the Flappy Bird game. Now that the first period is over,
                                             I
                                             can say that I'm far above most of my classmates. Mainly when it comes to
-                                            backend
+                                            back-end
                                             programming</p>
                                     </div>
                                 </div>
@@ -232,7 +215,7 @@
         </section>
         <section id="section-5" class="bg-dark panel">
             <div class="box-large bg">
-                <h1 class="text">Backend programming</h1>
+                <h1 class="text">Back-end programming</h1>
                 <p class="bg-light text-muted">Here are some of my projects I've worked / things I did on recently for
                     my programming classes.
                 </p>
@@ -241,7 +224,7 @@
                 <div class="box-large bg">
                     <h1>First Period</h1>
                     <div class="period-text bg-light">
-                        <p class="text-muted">I have some backend experience before I went to study at ROC. When I
+                        <p class="text-muted">I have some back-end experience before I went to study at ROC. When I
                             was 9 I started with some small unity project. with this I learned some C#. I stopped unity
                             when
                             there
@@ -266,7 +249,8 @@
 
                                 <div class="card hidden-project-info">
                                     <div class="bg-light hidden-box">
-                                        <p>This project didn't take long for me. I got a version with numbers working instead of colors on day one. and the rest like adding the
+                                        <p>This project didn't take long for me. I got a version with numbers working
+                                            instead of colors on day one. and the rest like adding the
                                             colors
                                             did not take any more time.</p>
                                     </div>
@@ -284,12 +268,14 @@
 
                                 <div class="card hidden-project-info">
                                     <div class="bg-light hidden-box">
-                                        <p>The inspiration for this project was Desktop goose; a app where u get a goose on your
+                                        <p>The inspiration for this project was Desktop goose; a app where u get a goose
+                                            on your
                                             screen that makes your screen full of memes, text or dirt. so I made a
                                             version of
                                             it but for the pokemon Azurill. I chose this pokemon because Maril, the
                                             evelution of
-                                            Azurill, is my favoret pokemon because Marill is the first known Pikachu clone.</p>
+                                            Azurill, is my favoret pokemon because Marill is the first known Pikachu
+                                            clone.</p>
                                     </div>
                                 </div>
                             </div>
@@ -321,7 +307,8 @@
                     <h1>Second Period</h1>
                     <div class="period-text bg-light">
                         <p class="text-muted">The second period was boring because we didn't do a lot. We just made
-                            Mastermind better but most of the things we needed to do to make it better I already had inplemented. So
+                            Mastermind better but most of the things we needed to do to make it better I already had
+                            inplemented. So
                             I
                             started to learn C++. My goal is to make a 2D game engine. What I mean by this is just the
                             basics, so
@@ -333,12 +320,19 @@
                             <div class="project-card box bg-light">
                                 <img src="assets/mastermind.png" alt="the mastermind project">
                                 <h2 class="text">Mastermind</h2>
-                                <p class="text-muted">...
+                                <p class="text-muted">Mastermind also was the end project of the second period, but now
+                                    we needed to
+                                    add more features to it. we learned more about arrays, randoms and functions. The
+                                    thing was that I already had most of these things.
                                 </p>
 
                                 <div class="card hidden-project-info">
                                     <div class="bg-light hidden-box">
-                                        <p>...</p>
+                                        <p>This project wasn't very hard because I already had most of the features
+                                            implemented. The reason why I didn't do so much this period was because I
+                                            remade the project in C++, but I still needed to do it in Java because not
+                                            every one had a C++ compiler and a part of my grade was based on someone
+                                            else looking at my work.</p>
                                     </div>
                                 </div>
                             </div>
@@ -347,17 +341,64 @@
                 </div>
             </div>
         </section>
+        <!-- Jamairo couldn't do it so I will -->
+        <div id="Carousel">
+            <div class="Carousel-group">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+            </div>
+            <div aria-hidden class="Carousel-group">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+                <img class="Carousel-card" src="assets/css_logo.png" alt="1">
+                <img class="Carousel-card" src="assets/HTML5_logo.png" alt="2">
+                <img class="Carousel-card" src="assets/js_logo.png" alt="3">
+                <img class="Carousel-card" src="assets/Java.png" alt="4">
+            </div>
+        </div>
     </main>
     <footer>
         <nav>
             <ul>
-                <li><a class="text" href="#"><!-- href="mailto:DaanDenkers1@gmail.com"-->
+                <li><a class="text" href="#">
                         <img class="icon" src="assets/icon/mail.png" alt="mail icon">
                         <h1>email</h1>
                     </a></li>
-                <li><a class="text" href="#"><!-- href="tel:+31 6 41810469" -->
+                <li><a class="text" href="#">
                         <img class="icon" src="assets/icon/phone.png" alt="phone icon">
-                        <h1>number:+31 6 41810469</h1>
+                        <h1>number:-------</h1>
                     </a></li>
                 <li><a class="text" href="https://github.com/denkersdaan-ops?tab=repositories" target="_blank">
                         <img class="icon" src="assets/icon/github.png" alt="github icon">

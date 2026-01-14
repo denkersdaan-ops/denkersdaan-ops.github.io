@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    height: 10vh;
+    height: auto;
     display: grid;
     padding: 4px;
 
@@ -36,10 +36,7 @@ header div ul li a {
     text-decoration: none;
     color: inherit;
     font-weight: bold;
-    font-size: 1.7rem;
-
-    -webkit-text-stroke-width: 1.5px;
-    -webkit-text-stroke-color: hsl(0, 0%, 100%);
+    font-size: 1.2rem;
 }
 
 .panel {
@@ -62,8 +59,18 @@ header div ul li a {
 }
 
 /* light is default */
-#header-dark {
+.bg-dark-header {
     background-color: hsl(0, 0%, 60%);
+    box-shadow: 0px 3px hsl(204, 100%, 65%);
+}
+
+#header-site {
+    transition: transform 0.3s ease;
+}
+
+
+#header-site.hide {
+    transform: translateY(-100%);
 }
 
 .bg-dark-home {
@@ -117,7 +124,8 @@ a {
 }
 
 footer {
-    margin-top: 5%;
+    margin-top: 20px;
+    padding-bottom: 10px;
     background-color: hsl(0, 0%, 80%);
     width: 100%;
     height: 70px;
@@ -127,73 +135,6 @@ footer {
 
 .icon {
     height: 50px;
-}
-
-@media screen and (prefers-color-scheme: dark) {
-    body {
-        background-color: hsl(0, 0%, 5%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    .bg-dark-home {
-        background-image: linear-gradient(hsl(0, 0%, 0%) 5%, hsl(0, 0%, 7%));
-    }
-
-    .bg-dark {
-        background-color: hsl(0, 0%, 7%);
-    }
-
-    #header-dark {
-        background-color: hsl(0, 0%, 0%);
-    }
-
-    header div ul li a {
-        -webkit-text-stroke-color: hsl(0, 0%, 0%);
-    }
-
-    .bg {
-        background-color: hsl(0, 0%, 10%);
-        border: 3px solid hsl(0, 0%, 18%);
-        border-radius: 16px;
-
-        box-shadow: none;
-    }
-
-    .bg-light {
-        background-color: hsl(0, 0%, 18%);
-
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .text {
-        color: hsl(0, 0%, 95%);
-    }
-
-    .text-muted {
-        color: hsl(0, 0%, 80%);
-    }
-
-    .main-color {
-        color: hsl(204, 64%, 53%);
-        text-shadow: 0px 0px 8px rgb(58, 150, 212);
-        text-decoration: none;
-
-        -webkit-text-stroke: 0px;
-    }
-
-    .projects img {
-        background-color: hsl(0, 0%, 15%);
-
-    }
-
-    footer {
-        background-color: hsl(0, 0%, 15%);
-    }
-
-    .icon {
-        filter: invert();
-    }
 }
 
 #secret {
@@ -242,6 +183,8 @@ footer {
     align-self: flex-start;
 }
 
+/* when popover is open */
+/* popover-open is new so there wil be an error */
 #settings:popover-open {
     display: grid;
     border: hsl(204, 100%, 65%) 2px solid;
@@ -251,6 +194,11 @@ footer {
     top: 50px;
     margin: 0;
     justify-content: end;
+    transition: transform 0.5s ease;
+}
+
+#settings.hide {
+    display: none;
 }
 
 #settings li {
@@ -266,7 +214,7 @@ footer {
     padding: 10px;
 }
 
-section{
+section {
     min-height: 100vh;
 }
 
@@ -465,6 +413,44 @@ footer ul li a {
     opacity: 1;
 }
 
+#Carousel {
+    display: flex;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 10px 0;
+}
+
+.Carousel-card {
+    width: 5em;
+    height: 5em;
+    padding: 10px;
+
+    background-color: hsl(0, 0%, 85%);
+    box-shadow: 5px 5px hsl(0, 0%, 0%);
+
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+.Carousel-group {
+    display: flex;
+    gap: 20px;
+
+    padding-right: 20px;
+
+    animation: spin 20s linear reverse infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
 /* center when on small screens */
 
 @media screen and (max-width: 1107px) {
@@ -520,8 +506,7 @@ footer ul li a {
     }
 
     header div ul li a {
-        -webkit-text-stroke-width: 1px;
-        font-size: 3.6vmin;
+        font-size: 2.8vmin;
     }
 
     .icon {
@@ -551,36 +536,69 @@ footer ul li a {
     }
 }
 
-#Carousel {
-    display: flex;
-    width: 100%;
-    overflow-x: auto;
-}
-
-#Carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.Carousel-card {
-    width: 18em;
-    height: 18em;
-}
-
-.Carousel-group {
-    display: flex;
-    gap: 20px;
-
-    padding-right: 20px;
-
-    animation: spin 10s linear reverse infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: translateX(0%);
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-color: hsl(0, 0%, 5%);
+        color: hsl(0, 0%, 90%);
     }
 
-    100% {
-        transform: translateX(-100%);
+    .bg-dark-home {
+        background-image: linear-gradient(hsl(0, 0%, 0%) 5%, hsl(0, 0%, 7%));
+    }
+
+    .bg-dark {
+        background-color: hsl(0, 0%, 7%);
+    }
+
+    .bg-dark-header {
+        background-color: hsl(0, 0%, 0%);
+    }
+
+    .bg {
+        background-color: hsl(0, 0%, 10%);
+        border: 3px solid hsl(0, 0%, 18%);
+        border-radius: 16px;
+
+        box-shadow: none;
+    }
+
+    .bg-light {
+        background-color: hsl(0, 0%, 18%);
+
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .text {
+        color: hsl(0, 0%, 95%);
+    }
+
+    .text-muted {
+        color: hsl(0, 0%, 80%);
+    }
+
+    .main-color {
+        color: hsl(204, 64%, 53%);
+        text-shadow: 0px 0px 8px rgb(58, 150, 212);
+        text-decoration: none;
+    }
+
+    .projects img {
+        background-color: hsl(0, 0%, 15%);
+
+    }
+
+    footer {
+        background-color: hsl(0, 0%, 10%);
+    }
+
+    .icon {
+        filter: invert();
+    }
+
+    .Carousel-card {
+        background-color: hsl(0, 0%, 18%);
+        box-shadow: none;
+        border: 3px solid hsl(0, 0%, 28%);
     }
 }
