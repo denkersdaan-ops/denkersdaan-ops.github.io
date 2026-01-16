@@ -24,7 +24,8 @@ header div nav ul {
     list-style-type: none;
     text-decoration: none;
 
-    margin: auto;
+    margin: 0;
+    width: 100%;
     padding: 0;
     display: flex;
     justify-content: center;
@@ -235,13 +236,11 @@ section {
 #section-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
-    justify-self: center;
-
     gap: 15%;
-
     width: 80%;
+    margin: 0 auto;/* for firefox */
 }
 
 h1,
@@ -254,15 +253,23 @@ h3 {
     font-size: 1.6vmin;
 }
 
-#front-page img {
-    width: 100%;
+#model-3d {
+    width: 12.5%;
+    height: 12.5%;
+    filter: drop-shadow(0px 0px 5px rgba(0, 183, 255, 0.432));
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+    transform: scale(8);
+
+    justify-self: center;
 }
 
 #section-3,
 #section-5 {
     margin-top: 200px;
     display: flex;
-    justify-self: center;
+    margin: 0 auto;/* for firefox */
     justify-content: center;
     flex-direction: column;
     width: 80%;
