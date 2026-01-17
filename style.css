@@ -225,15 +225,15 @@ section {
     filter: brightness(0) saturate(100%) invert(62%) sepia(83%) saturate(2396%) hue-rotate(177deg) brightness(87%) contrast(89%);
 }
 
-#section-1 {
+#front-page {
     padding-top: 60px;
     height: 90vh;
     display: flex;
     justify-content: center;
 }
 
-#front-page,
-#section-2 {
+#front,
+#about-me {
     display: grid;
     grid-template-columns: 1fr 1fr;
     justify-items: center;
@@ -256,17 +256,15 @@ h3 {
 #model-3d {
     width: 12.5%;
     height: 12.5%;
-    filter: drop-shadow(0px 0px 5px rgba(0, 183, 255, 0.432));
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
 
-    transform: scale(8);
+    transform: scale(6);
 
     justify-self: center;
 }
 
-#section-3,
-#section-5 {
+#front-end,
+#back-end {
     margin-top: 200px;
     display: flex;
     margin: 0 auto;/* for firefox */
@@ -462,23 +460,23 @@ footer ul li a {
 
 @media screen and (max-width: 1107px) {
 
-    #front-page {
+    #front {
         grid-template-columns: 1fr;
         justify-content: center;
     }
 
-    #front-page>* {
+    #front>* {
         justify-items: center;
     }
 
-    #front-page img {
+    #front img {
         width: 70%;
         justify-self: center;
     }
 
-    #front-page h1,
-    #front-page h2,
-    #front-page h3 {
+    #front h1,
+    #front h2,
+    #front h3 {
         text-align: center;
     }
 
@@ -486,12 +484,12 @@ footer ul li a {
         font-size: 2.7vmin;
     }
 
-    #section-2 {
+    #about-me {
         grid-template-columns: 1fr;
         justify-content: center;
     }
 
-    #section-2>* {
+    #about-me>* {
         align-self: center;
         justify-self: center;
     }
