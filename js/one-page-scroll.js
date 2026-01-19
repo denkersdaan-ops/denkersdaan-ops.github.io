@@ -1,3 +1,5 @@
+// it was made with ai but tweaked by me to fit my needs(btw the only js made by ai)
+
 document.addEventListener("DOMContentLoaded", () => {
   const panels = [
     ...document.querySelectorAll("main > section.panel"),

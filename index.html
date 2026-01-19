@@ -30,6 +30,7 @@
                     <li><a href="#about-me" class="text">About me</a></li>
                     <li><a href="#front-end" class="text">Front-end</a></li>
                     <li><a href="#back-end" class="text">Back-end </a></li>
+                    <li><a href="#footer" class="text">Contect</a></li>
                 </ul>
             </nav>
         </div>
@@ -347,6 +348,26 @@
                 </div>
             </div>
         </section>
+
+        <!-- makes the hidden boxes hidden when clicking outside -->
+        <script>
+            const boxes = document.querySelectorAll('.info-box');
+            boxes.forEach(box => {
+                box.addEventListener('click', e => {
+                    e.stopPropagation();
+
+                    boxes.forEach(b => {
+                        if (b !== box) b.classList.remove('active');
+                    });
+
+                    box.classList.toggle('active');
+                });
+            });
+
+            document.addEventListener('click', () => {
+                boxes.forEach(box => box.classList.remove('active'));
+            });
+        </script>
         <!-- Jamairo couldn't do it so I will -->
         <div id="Carousel">
             <div class="Carousel-group">
@@ -395,7 +416,7 @@
             </div>
         </div>
     </main>
-    <footer>
+    <footer id="footer">
         <h1>Contact:</h1>
         <nav>
             <ul>
@@ -403,7 +424,8 @@
                         <img class="icon" src="assets/icon/mail.png" alt="mail icon">
                         <h2>Email</h2>
                     </a></li>
-                <li><a class="text" href="#"><!-- I know i can link to my phone number, but u don't want others to see -->
+                <li><a class="text"
+                        href="#"><!-- I know i can link to my phone number, but u don't want others to see -->
                         <img class="icon" src="assets/icon/phone.png" alt="phone icon">
                         <h2>Number:</h2>
                     </a></li>
@@ -414,31 +436,6 @@
             </ul>
         </nav>
     </footer>
-    <script>
-        const boxes = document.querySelectorAll('.info-box');
-
-        // Toggle bij klik op kaart
-        boxes.forEach(box => {
-            box.addEventListener('click', e => {
-                e.stopPropagation(); // voorkomt direct sluiten
-
-                // sluit alle andere
-                boxes.forEach(b => {
-                    if (b !== box) b.classList.remove('active');
-                });
-
-                // toggle deze
-                box.classList.toggle('active');
-            });
-        });
-
-        // Klik buiten alle kaarten → alles sluiten
-        document.addEventListener('click', () => {
-            boxes.forEach(box => box.classList.remove('active'));
-        });
-    </script>
-
-
 </body>
 
 </html>
