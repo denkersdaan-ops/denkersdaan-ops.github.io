@@ -314,11 +314,12 @@ footer ul li a {
 }
 
 .info-box {
+    display: flex;
     inset: 0;
     flex: 0 1 450px;
     max-width: 450px;
     position: relative;
-    justify-items: center;
+    justify-content: center;
 }
 
 
@@ -510,10 +511,6 @@ footer ul li a {
     #about-me>* {
         align-self: center;
         justify-self: center;
-    }
-
-    .projects {
-        justify-content: center;
     }
 }
 
