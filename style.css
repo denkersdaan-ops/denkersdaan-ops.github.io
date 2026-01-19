@@ -356,7 +356,7 @@ footer ul li a {
     position: absolute;
     top: 0;
 
-    width: calc(100% + 20px);
+    width:100%;
     height: auto;
 
     justify-self: center;
@@ -374,7 +374,6 @@ footer ul li a {
 }
 
 .card .hidden-box {
-
     margin: calc(-16px + -7px) -7px;
     padding: 0;
 }
